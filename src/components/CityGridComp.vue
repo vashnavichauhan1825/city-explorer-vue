@@ -23,7 +23,7 @@ store.fetchCities();
 </script>
 
 <template>
-  <div>
+  <div class="text-red-600">
     <table>
       <thead>
         <tr>
