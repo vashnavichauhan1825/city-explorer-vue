@@ -23,30 +23,46 @@ store.fetchCities();
 </script>
 
 <template>
-  <div class="text-red-600">
-    <table>
-      <thead>
+  <div class="w-full py-3 px-10">
+    <table class="w-full text-left">
+      <thead class="bg-[var(--cta-color)] text-[var(--primary-color)]">
         <tr>
-          <th>City</th>
-          <th>Country</th>
-          <th>Region</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-          <th>Population</th>
+          <th class="font-normal text-xl p-1">City</th>
+          <th class="font-normal text-xl p-1">Country</th>
+          <th class="font-normal text-xl p-1">Region</th>
+          <th class="font-normal text-xl p-1">Latitude</th>
+          <th class="font-normal text-xl p-1">Longitude</th>
+          <th class="font-normal text-xl p-1">Population</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="city in cities" :key="city.id">
-          <td>{{ city.name }}</td>
-          <td>{{ city.country }}</td>
-          <td>{{ city.region }}</td>
-          <td>{{ city.latitude }}</td>
-          <td>{{ city.longitude }}</td>
-          <td>{{ city.population }}</td>
+        <tr
+          v-for="city in cities"
+          :key="city.id"
+          class="even:bg-[var(--ter-color)]"
+        >
+          <td class="px-1 py-2">{{ city.name }}</td>
+          <td class="px-1 py-2">{{ city.country }}</td>
+          <td class="px-1 py-2">{{ city.region }}</td>
+          <td class="px-1 py-2">{{ city.latitude }}</td>
+          <td class="px-1 py-2">{{ city.longitude }}</td>
+          <td class="px-1 py-2">{{ city.population }}</td>
         </tr>
       </tbody>
     </table>
-    <button @click="prevHandler">Previous</button>
-    <button @click="nextHandler">Next</button>
+    <div class="w-full flex justify-center mt-10 gap-20">
+      <button
+        @click="prevHandler"
+        class="bg-[var(--cta-color)] text-[var(--primary-color)] px-3 py-2 rounded-md text-center font-semibold"
+      >
+        Prev
+      </button>
+      <button
+        @click="nextHandler"
+        class="bg-[var(--cta-color)] text-[var(--primary-color)] px-3 py-2 rounded-md text-center font-semibold"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </template>
