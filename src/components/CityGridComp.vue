@@ -1,9 +1,9 @@
 <script setup>
 import { computed } from "vue";
 import { useCityStore } from "../stores/cityStore";
-
+import CityCardComp from "./CityCardComp.vue";
 const store = useCityStore();
-
+const viewMode = computed(() => store.viewCard);
 const cities = computed(() => store.cities);
 const prevHandler = () => {
   if (store.offset > 0) {
@@ -24,7 +24,7 @@ store.fetchCities();
 
 <template>
   <div class="w-full py-3 px-10">
-    <table class="w-full text-left">
+    <table class="w-full text-left" v-if="viewMode === 'grid'">
       <thead class="bg-[var(--cta-color)] text-[var(--primary-color)]">
         <tr>
           <th class="font-normal text-xl p-1">City</th>
@@ -50,6 +50,9 @@ store.fetchCities();
         </tr>
       </tbody>
     </table>
+    <div v-else class="grid grid-cols-2 gap-6">
+      <CityCardComp v-for="city in cities" :key="city.id" :city="city" />
+    </div>
     <div class="w-full flex justify-center mt-10 gap-20">
       <button
         @click="prevHandler"
