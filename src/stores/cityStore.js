@@ -5,6 +5,7 @@ export const useCityStore = defineStore("cityStore", {
   state: () => ({
     cities: [],
     totalCities: 0,
+    viewCard: "grid",
     offset: 0,
   }),
   actions: {
@@ -16,6 +17,9 @@ export const useCityStore = defineStore("cityStore", {
       } catch (error) {
         console.error("Error :", error);
       }
+    },
+    toggleViewMode() {
+      this.viewCard = this.viewCard === "grid" ? "card" : "grid";
     },
   },
 });
