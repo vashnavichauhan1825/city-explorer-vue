@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { useCityStore } from "../stores/cityStore";
 import CityCardComp from "./CityCardComp.vue";
 import CityModalComp from "./CityModalComp.vue";
+import notFoundImg from "../assets/not-found.svg";
 const store = useCityStore();
 const viewMode = computed(() => store.viewCard);
 const cities = computed(() => store.cities);
@@ -62,6 +63,19 @@ store.fetchCities();
     <div v-else class="grid grid-cols-2 gap-6">
       <CityCardComp v-for="city in cities" :key="city.id" :city="city" />
     </div>
+    <div
+      v-show="!cities.length"
+      class="flex w-full justify-center items-center object-contain p-4 gap-3"
+    >
+      <img
+        class="max-w-[500px]"
+        loading="lazy"
+        :src="notFoundImg"
+        alt="not-found-image"
+      />
+      <h2 class="text-3xl">Not Found !</h2>
+    </div>
+
     <div class="w-full flex justify-center mt-10 gap-20">
       <button
         @click="prevHandler"

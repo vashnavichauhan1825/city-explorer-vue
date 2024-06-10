@@ -18,4 +18,7 @@ export default {
   getNearbyCities: (cityId, radius = 100) => {
     return apiClient.get(`/cities/${cityId}/nearbyCities?radius=${radius}`);
   },
+  searchCitiesByRegion: (region) => {
+    return apiClient.get(`/cities?namePrefix=${region}`);
+  },
 };

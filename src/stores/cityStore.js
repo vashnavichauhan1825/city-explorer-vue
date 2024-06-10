@@ -28,6 +28,15 @@ export const useCityStore = defineStore("cityStore", {
         console.error("Error :", error);
       }
     },
+    async searchCities(region) {
+      try {
+        const response = await api.searchCitiesByRegion(region);
+        this.cities = response.data.data;
+        console.log(this.cities);
+      } catch (error) {
+        console.error("Error :", error);
+      }
+    },
     toggleViewMode() {
       this.viewCard = this.viewCard === "grid" ? "card" : "grid";
     },
