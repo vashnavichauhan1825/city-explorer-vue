@@ -27,10 +27,10 @@ const debouncedSearchCities = debounce(searchCities, 1000);
 
 <template>
   <nav
-    class="w-full px-10 py-5 flex justify-between bg-[var(--secondary-color)]"
+    class="w-full px-10 py-5 max-sm:px-2 flex justify-between bg-[var(--secondary-color)]"
   >
     <input
-      class="rounded-md p-2"
+      class="rounded-md p-2 max-sm:p-1"
       v-model="region"
       placeholder="Search Cities"
       @input="debouncedSearchCities"
