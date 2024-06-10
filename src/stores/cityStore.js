@@ -5,6 +5,7 @@ export const useCityStore = defineStore("cityStore", {
   state: () => ({
     cities: [],
     totalCities: 0,
+    offset: 0,
   }),
   actions: {
     async fetchCities(offset = 0, limit = 10) {

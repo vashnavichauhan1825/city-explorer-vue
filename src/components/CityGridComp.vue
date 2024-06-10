@@ -1,13 +1,25 @@
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useCityStore } from "../stores/cityStore";
 
 const store = useCityStore();
 
 const cities = computed(() => store.cities);
-onMounted(() => {
-  store.fetchCities();
-});
+const prevHandler = () => {
+  if (store.offset > 0) {
+    store.offset -= 10;
+    store.fetchCities(store.offset);
+  }
+};
+
+const nextHandler = () => {
+  console.log(store.offset);
+  if (store.offset + 10 < store.totalCities) {
+    store.offset += 10;
+    store.fetchCities(store.offset);
+  }
+};
+store.fetchCities();
 </script>
 
 <template>
@@ -34,5 +46,7 @@ onMounted(() => {
         </tr>
       </tbody>
     </table>
+    <button @click="prevHandler">Previous</button>
+    <button @click="nextHandler">Next</button>
   </div>
 </template>
