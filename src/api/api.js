@@ -15,4 +15,7 @@ export default {
   getCities: (offset = 0, limit = 10) => {
     return apiClient.get(`/cities?offset=${offset}&limit=${limit}`);
   },
+  getNearbyCities: (cityId, radius = 100) => {
+    return apiClient.get(`/cities/${cityId}/nearbyCities?radius=${radius}`);
+  },
 };

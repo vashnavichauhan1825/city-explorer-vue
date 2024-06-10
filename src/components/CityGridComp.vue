@@ -2,22 +2,30 @@
 import { computed } from "vue";
 import { useCityStore } from "../stores/cityStore";
 import CityCardComp from "./CityCardComp.vue";
+import CityModalComp from "./CityModalComp.vue";
 const store = useCityStore();
 const viewMode = computed(() => store.viewCard);
 const cities = computed(() => store.cities);
+const selectedCity = computed(() => store.selectedCity);
 const prevHandler = () => {
   if (store.offset > 0) {
     store.offset -= 10;
     store.fetchCities(store.offset);
   }
 };
-
+const selectCity = (city) => {
+  store.selectCity(city);
+  store.fetchNearbyCities(city.id);
+};
 const nextHandler = () => {
   console.log(store.offset);
   if (store.offset + 10 < store.totalCities) {
     store.offset += 10;
     store.fetchCities(store.offset);
   }
+};
+const clearSelectedCity = () => {
+  store.clearSelectedCity();
 };
 store.fetchCities();
 </script>
@@ -39,7 +47,8 @@ store.fetchCities();
         <tr
           v-for="city in cities"
           :key="city.id"
-          class="even:bg-[var(--ter-color)]"
+          class="even:bg-[var(--ter-color)] hover:bg-[var(--secondary-color)] hover:text-[var(--ter-color)] cursor-pointer"
+          @click="selectCity(city)"
         >
           <td class="px-1 py-2">{{ city.name }}</td>
           <td class="px-1 py-2">{{ city.country }}</td>
@@ -67,5 +76,10 @@ store.fetchCities();
         Next
       </button>
     </div>
+    <CityModalComp
+      v-if="selectedCity"
+      :city="selectedCity"
+      @close="clearSelectedCity"
+    />
   </div>
 </template>
